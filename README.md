@@ -1,0 +1,1 @@
+Example of using slider plugin. jQuery, CSS, Html.
