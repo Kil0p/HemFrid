@@ -1,0 +1,113 @@
+@font-face {
+    font-family: "bree-serif";
+    src: url('../font/bree-serif/BreeSerif-Regular.eot');
+    src: local('BreeSerif-Regular'), url("../font/bree-serif/BreeSerif-Regular.woff") format('woff'), url('../font/bree-serif/BreeSerif-Regular.ttf') format('truetype'), url('../font/bree-serif/BreeSerif-Regular.svg#webfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+.order{
+    width: 670px;
+    height: 330px;
+    margin: auto;
+    border: 1px solid #000000;
+    border-radius: 7px;
+    background-color: #F9F9F8;
+}
+.grey-line{
+    width: auto;
+    margin: 30px 20px;
+    height: 0;
+    border-bottom: 1px solid #cdcdcc;
+}
+.padding-b-20 {
+    padding-bottom: 20px;
+}
+.padding-t-20 {
+    padding-top: 20px;
+}
+.padding-l-20{
+    padding-left: 20px;
+}
+.padding-r-20{
+    padding-right: 20px;
+}
+#HouseSize{
+    margin: auto;
+    width: 100px;
+    margin-top: 10px;
+}
+.slider{
+    width: 450px;
+    margin: auto;
+}
+.options{
+    height: 120px;
+}
+.summary{
+    width: 640px;
+    height: 95px;
+    position: relative;
+}
+
+.disclaimer {
+    width: 640px;
+    height: 44px;
+}
+p.disclaimer-text {
+    padding-top: 12px;
+    font-size: 11px;
+    line-height: 16px;
+    color: #999999;
+}
+.price-summary{
+    font-family: 'bree-serif';
+    font-size: 14px;
+    color: #666666;
+}
+.blue-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #004c93;
+    display: inline-block;
+    font-family: 'bree-serif';
+    font-size: 18px;
+    line-height: 21px;
+    color: #fff !important;
+    padding: 12px 20px;
+    padding-bottom: 11px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px #333;
+    height: 20px;
+}
+.block-label{
+    color: #333333;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    font-family: 'bree-serif';
+    display: block;
+    font-size: 13px;
+    line-height: 20px;
+}
+.center-text{
+    text-align: center;
+}
+.radio-buttons{
+    display: block;
+    margin: auto;
+    width: 370px;
+    font-family: 'bree-serif';
+    font-size: 13px;
+    line-height: 20px;
+    color: #666666;
+}
+.slider-controller{
+    margin: auto;
+    width: 20%;
+}

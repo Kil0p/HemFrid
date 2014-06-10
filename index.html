@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>noUiSlider Example</title>
+    <script src="./script/jquery-1.11.1.min.js"></script>
+    <script src="./script/jquery.nouislider.min.js"></script>
+    <link href="style/style.css" rel="stylesheet">
+    <link href="./style/jquery.nouislider.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="order padding-b-20 padding-t-20">
+    <div class="options padding-l-20 padding-r-20">
+        <label for="HouseSize" class="block-label center-text" style="">Hur många m<sup style="">2</sup> bor du på?</label>
+        <div id="slider" class="slider"></div>
+        <div class="slider-controller">
+            <input type="number" id="HouseSize">
+            <span class="input-suffix" style="">m<sup style="">2</sup></span>
+        </div>
+        <label class="block-label center-text padding-t-20" style="">Hur ofta vill du ha städning?</label>
+        <span id="VisitFrequency" class="radio-buttons" style="">
+            <input id="VisitFrequency_0" type="radio" name="ctl00$cphDocument$cphFullWidth$cphMainColumn$ctl04$PriceCalculatorControl$ctl00$VisitFrequency" value="EveryWeek" checked="checked" style="">
+            <label for="VisitFrequency_0" style="">Varje vecka</label>
+            <input id="VisitFrequency_1" type="radio" name="ctl00$cphDocument$cphFullWidth$cphMainColumn$ctl04$PriceCalculatorControl$ctl00$VisitFrequency" value="EveryotherWeek"  style="">
+            <label for="VisitFrequency_1" style="">Varannan vecka</label>
+            <input id="VisitFrequency_2" type="radio" name="ctl00$cphDocument$cphFullWidth$cphMainColumn$ctl04$PriceCalculatorControl$ctl00$VisitFrequency" value="EveryMonth" style="">
+            <label for="VisitFrequency_2" style="">En gång i månaden</label>
+        </span>
+    </div>
+    <div class="grey-line"></div>
+    <div class="summary padding-l-20">
+        <table class="price-summary" style="">
+            <tbody style=""><tr style="">
+                <td style="">Pris efter skattereduktion:</td>
+                <td class="price-column" style=""><span class="price" style="" id="price">2 825</span> kr</td>
+            </tr>
+            <tr style="">
+                <td style="">Startkit med microtrasor och moppskaft:</td>
+                <td class="price-column" style="">0 kr</td>
+            </tr>
+            <tr style="">
+                <td style="">Serviceavgift:</td>
+                <td class="price-column" style="">+<span class="base-fee" style="">90</span> kr</td>
+            </tr>
+            <tr class="discount hidden" style="display: none;">
+                <td style="">Rabatt:</td>
+                <td class="price-column" style="">-<span class="discount" style="">NaN</span> kr</td>
+            </tr>
+            <tr class="sum" style="">
+                <td style="">Total månadskostnad:</td>
+                <td class="price-column" style=""><span class="total" style="" id="finalPrice">2 915</span> kr</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="#boka" id="book-meeting-link" class="tab-link blue-btn margin-r-20 price-btn" style="">Boka hembesök »</a>
+    </div>
+    <div class="disclaimer padding-l-20">
+        <p class="disclaimer-text">
+            Pris efter skattereduktion. En exakt bedömning görs vid första besöket hos dig där vi bland annat tar hänsyn till hur många som bor i hushållet och husdjur etc.
+        </p>
+    </div>
+
+</div>
+
+
+
+<script>
+    var houseSize = $('#HouseSize');
+    var price = 0;
+    var fees = 90;
+    $("#slider").noUiSlider({
+        start: [ 50 ],
+        step : 1,
+        range: {
+            'min': [ 1 ],
+            'max': [ 700 ]
+        },
+        serialization: {
+            lower: [
+                $.Link({
+                    target: houseSize
+                })
+            ],
+            format: {
+                decimals: 2
+            }
+        }
+    });
+    // events
+    $('#slider').on('set slide',function(e){
+        countPriceByHouseSize();
+        modifyPriceByVisitFrequency();
+        showPriceToCustomer();
+    });
+    houseSize.on('change keyup',function(e){
+        countPriceByHouseSize();
+        modifyPriceByVisitFrequency();
+        showPriceToCustomer();
+    });
+    $('#VisitFrequency_0, #VisitFrequency_1, #VisitFrequency_2').change(function(){
+        countPriceByHouseSize();
+        modifyPriceByVisitFrequency();
+        showPriceToCustomer();
+    });
+    /** obliczanie wartości ceny przy złożeniu odpowiedniego zamówienia
+     *  mocno testowe bo nie wiem jakich wortości i cen oczekujesz.
+     *  Ceny mozna ustawic poprzez skrypt php i tylko sobie zmieniac te ceny z poziomu administracji.
+     */
+
+    function countPriceByHouseSize(){
+        if(houseSize.val() <= 100){
+            price = 1000;
+        }else if(houseSize.val() <= 300){
+            price = 2000;
+        }else if(houseSize.val() <= 500){
+            price = 3000;
+        }else{
+            price = 4000;
+        }
+    }
+    function modifyPriceByVisitFrequency(){
+        if($('#VisitFrequency_1').is(':checked')){
+            price = 0.7 * price;
+        }else if($('#VisitFrequency_2').is(':checked')){
+            price = 0.4 * price;
+        }
+    }
+    function showPriceToCustomer(){
+        $('#price').html(price);
+        $('#finalPrice').html(price + fees);
+    }
+</script>
+
+</body>
+</html>
